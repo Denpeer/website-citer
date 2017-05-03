@@ -23,7 +23,7 @@ def generate_entry(url):
     return entry
 
 arglen = len(sys.argv)
-if (arglen != 2) and (arglen != 3) and (True == False):
+if (arglen != 2) and (arglen != 3):
     print('Usage: onlineToBib.py <url>\n'
           'OR\n'
           'Usage: onlineToBib.py <inputfile> <outputfile>')
