@@ -17,17 +17,20 @@ def generate_entry(url):
         'title': title[:-2], #title contains newline
         'url': url,
         'note': 'retrieved at ' + date.today().__str__(),
+        'year': date.today().year.__str__(),
         'ENTRYTYPE': 'MISC',
         'ID': 'webpage:' + author
     }
     return entry
 
 arglen = len(sys.argv)
-if (arglen != 2) and (arglen != 3):
+if (arglen > 3):
     print('Usage: onlineToBib.py <url>\n'
           'OR\n'
-          'Usage: onlineToBib.py <inputfile> <outputfile>')
-    sys.exit(1)
+          'Usage: onlineToBib.py <inputfile> <outputfile>'
+          'OR\n'
+          'Usage: onlineToBib.py')
+
 
 if (arglen == 2):
     db = bibtexparser.bibdatabase.BibDatabase()
@@ -40,6 +43,12 @@ if (arglen == 2):
     sys.exit(0)
 
 db = bibtexparser.bibdatabase.BibDatabase()
+
+inputfile = 'urls.txt'
+outputfile = 'out.bib'
+if (arglen == 3):
+    inputfile = sys.argv[1]
+    outputfile = sys.argv[2]
 
 with open('urls.txt', 'r') as url_file:
     for url in url_file: #file must contain only urls seperated by newlines
